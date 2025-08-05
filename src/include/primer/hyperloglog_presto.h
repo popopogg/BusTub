@@ -13,8 +13,10 @@
 #pragma once
 
 #include <bitset>
+#include <cstdint>
 #include <memory>
 #include <mutex>  // NOLINT
+#include <shared_mutex>
 #include <sstream>
 #include <string>
 #include <unordered_map>
@@ -92,6 +94,11 @@ class HyperLogLogPresto {
   uint64_t cardinality_;
 
   // TODO(student) - can add more data structures as required
+  uint16_t b_;
+  uint32_t m_;  // m=2^b
+
+  std::mutex mtx_;
+  std::shared_mutex rwmtx_;
 };
 
 }  // namespace bustub
